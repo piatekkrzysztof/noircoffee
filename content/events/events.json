@@ -1,0 +1,74 @@
+[
+  {
+    "id": "1",
+    "title": "Wulkan & Aromat: Kawa z Etiopii",
+    "tag": "Cupping",
+    "date": "2025-05-14",
+    "startTime": "14:00",
+    "endTime": "17:00",
+    "price": 220,
+    "spotsTotal": 8,
+    "spotsLeft": 3,
+    "description": "Immersyjne spotkanie z etiopską kawą — od mapy po filiżankę. Cupping sześciu ziaren z regionu Yirgacheffe i Sidama."
+  },
+  {
+    "id": "2",
+    "title": "Brewing Methods Deep Dive",
+    "tag": "Masterclass",
+    "date": "2025-05-21",
+    "startTime": "18:00",
+    "endTime": "21:00",
+    "price": 280,
+    "spotsTotal": 10,
+    "spotsLeft": 5,
+    "description": "V60, Chemex, AeroPress, Kalita Wave — pełna analiza metod parzenia z degustacją porównawczą."
+  },
+  {
+    "id": "3",
+    "title": "Kolumbia vs Rwanda: Blind Cupping",
+    "tag": "Prywatny",
+    "date": "2025-05-28",
+    "startTime": "19:00",
+    "endTime": "22:00",
+    "price": 350,
+    "spotsTotal": 6,
+    "spotsLeft": 1,
+    "description": "Cztery ziarna, dwa kontynenty, zero podpowiedzi. Blind cupping dla zaawansowanych."
+  },
+  {
+    "id": "4",
+    "title": "Fermentation Lab — Anaerobic Processing",
+    "tag": "Warsztat",
+    "date": "2025-06-04",
+    "startTime": "17:00",
+    "endTime": "20:00",
+    "price": 240,
+    "spotsTotal": 12,
+    "spotsLeft": 7,
+    "description": "Nauka o fermentacji beztlenowej i jej wpływie na smak. Degustacja czterech anaerobic micro-lotów."
+  },
+  {
+    "id": "5",
+    "title": "Gesha Vertical Tasting",
+    "tag": "Cupping",
+    "date": "2025-06-11",
+    "startTime": "15:00",
+    "endTime": "18:00",
+    "price": 390,
+    "spotsTotal": 8,
+    "spotsLeft": 2,
+    "description": "Trzy roczniki Geshy z Etiopii i Panamy — rzadkość absolutna."
+  },
+  {
+    "id": "6",
+    "title": "Terroir a smak: nauka o origin",
+    "tag": "Wykład",
+    "date": "2025-06-18",
+    "startTime": "18:30",
+    "endTime": "20:30",
+    "price": 180,
+    "spotsTotal": 20,
+    "spotsLeft": 9,
+    "description": "Wykład z degustacją — jak gleba, klimat i odmiana kształtują profil smakowy kawy."
+  }
+]
