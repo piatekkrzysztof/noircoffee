@@ -1,5 +1,5 @@
 <template>
-  <footer class="bg-espresso pb-12 pt-32 md:pt-44">
+  <footer class="bg-espresso pb-16 pt-32 md:pt-44">
     <!-- The back of a postcard sent from Floriańska -->
     <div class="shell">
       <div v-reveal class="relative mx-auto max-w-[1200px] text-espresso">
@@ -67,28 +67,17 @@
           </div>
 
           <p class="text-center text-[16px] md:col-span-2">
-            © {{ year }} Noir Coffee Atelier, Kraków · projekt portfolio, rezerwacje i zamówienia działają demonstracyjnie
+            © {{ year }} Noir Coffee Atelier, Kraków · projekt portfolio, rezerwacje i zamówienia działają demonstracyjnie ·
+            <NuxtLink to="/zrodla-zdjec" class="postcard-link">Źródła zdjęć</NuxtLink>
           </p>
         </div>
       </div>
 
-      <div class="mx-auto mt-14 max-w-[1200px] text-[16px] text-cream-dim">
-        <h2 class="text-cream">Zdjęcia i film z Wikimedia Commons</h2>
-        <ul class="mt-3 grid gap-x-10 gap-y-1 sm:grid-cols-2 lg:grid-cols-3">
-          <li v-for="c in CREDITS" :key="c.file">
-            <a :href="c.page" class="text-cream underline decoration-cream/30 underline-offset-2 hover:decoration-brass" rel="noopener" target="_blank">{{ c.creator }}</a>,
-            <a :href="c.licenseUrl" class="underline decoration-cream/30 underline-offset-2 hover:decoration-brass" rel="noopener" target="_blank">{{ c.license }}</a>
-          </li>
-        </ul>
-        <p class="mt-3">Pozostałe zdjęcia: Pixabay.</p>
-      </div>
     </div>
   </footer>
 </template>
 
 <script setup lang="ts">
-import { CREDITS } from '~/data/credits'
-
 const year = new Date().getFullYear()
 
 const footerLinks = [
