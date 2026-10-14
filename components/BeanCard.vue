@@ -1,58 +1,68 @@
 <template>
-  <div
-    class="relative overflow-hidden cursor-none"
-    style="background:#1a1009;border:1px solid rgba(196,150,58,.08);padding:22px;transition:border-color .3s,transform .3s,box-shadow .3s"
-    @mouseenter="h=true" @mouseleave="h=false"
-    :style="h?'border-color:rgba(196,150,58,.25);transform:translateX(4px);box-shadow:-4px 0 20px rgba(196,150,58,.05)':''"
+  <!-- The best match is set as a paper cupping card; the rest sit on the dark surface -->
+  <article
+    v-reveal
+    class="group grid gap-6 p-5 transition-colors duration-300 sm:grid-cols-[180px_1fr] sm:p-6"
+    :class="best ? 'bg-paper text-espresso' : 'bg-surface text-cream hover:bg-surface2'"
   >
-    <div class="absolute left-0 top-0 bottom-0 w-[2px] transition-transform duration-400" style="background:linear-gradient(to bottom,transparent,#C4963A,transparent);transform-origin:center" :style="{transform:h?'scaleY(1)':'scaleY(0)'}" />
-    <div class="flex justify-between items-start mb-3.5">
-      <div>
-        <div class="font-serif font-light" style="font-size:20px;color:#EFD9BC">{{ bean.name }}</div>
-        <div class="font-sans text-[8px] tracking-[3px] uppercase mt-1" style="color:#C4963A">{{ bean.origin }}</div>
-      </div>
-      <div class="text-right">
-        <div class="font-serif font-light" style="font-size:28px;color:#C4963A;line-height:1">{{ bean.scaScore }}</div>
-        <div class="font-sans font-extralight text-[10px] tracking-[1px]" style="color:#5a4935">SCA Score</div>
-      </div>
+    <div class="aspect-[4/3] overflow-hidden sm:aspect-[4/5]">
+      <img
+        :src="bean.imageUrl"
+        :alt="bean.imageAlt"
+        loading="lazy"
+        class="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+      />
     </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:7px 20px;margin-bottom:14px">
-      <div v-for="[label,val] in bars" :key="String(label)" class="flex items-center gap-2">
-        <span class="font-sans text-[9px] tracking-[1px]" style="color:#5a4935;width:48px">{{ label }}</span>
-        <div style="flex:1;height:1px;background:rgba(46,33,24,.8);overflow:visible;position:relative">
-          <div style="height:100%;background:linear-gradient(to right,#6b4e1a,#C4963A);transition:width .5s cubic-bezier(.23,1,.32,1);box-shadow:0 0 4px rgba(196,150,58,.3)" :style="{width:(Number(val)*10)+'%'}" />
+
+    <div class="flex flex-col">
+      <div class="flex flex-wrap items-start justify-between gap-x-6 gap-y-2">
+        <h3 class="t-2">{{ bean.name }}</h3>
+        <p class="text-right">
+          <span class="font-serif text-[44px] font-light leading-none tabular-nums">{{ match }}%</span>
+          <span class="block text-[14px]">{{ best ? 'najlepsze dopasowanie' : 'dopasowania' }}</span>
+        </p>
+      </div>
+
+      <p class="mt-1 text-[16px]" :class="best ? '' : 'text-cream-dim'">
+        {{ bean.origin }}, {{ bean.processing.toLowerCase() }}, odmiana {{ bean.variety }}, {{ bean.altitude }}. {{ bean.scaScore }} punktów SCA.
+      </p>
+
+      <p class="mt-4 max-w-[60ch] text-[16px] leading-relaxed">{{ bean.description }}</p>
+
+      <dl class="mt-5 grid grid-cols-2 gap-x-6 gap-y-3 sm:grid-cols-4">
+        <div v-for="row in flavorRows" :key="row.label">
+          <div class="flex justify-between text-[14px]">
+            <dt>{{ row.label }}</dt>
+            <dd class="tabular-nums">{{ row.value }}/10</dd>
+          </div>
+          <div class="mt-1 h-1.5" :class="best ? 'bg-espresso/15' : 'bg-surface3'" aria-hidden="true">
+            <div class="h-full transition-[width] duration-500 ease-out" :class="best ? 'bg-espresso' : 'bg-brass'" :style="{ width: (row.value * 10) + '%' }" />
+          </div>
+        </div>
+      </dl>
+
+      <div class="mt-auto flex flex-wrap items-center justify-between gap-4 pt-6">
+        <p class="text-[16px]">W filiżance: {{ bean.tasting.join(', ') }}</p>
+        <div class="flex items-center gap-5">
+          <span class="text-[18px] font-medium">{{ bean.price }} zł za 100 g</span>
+          <NuxtLink to="/preorder" :class="best ? 'btn-dark' : 'btn-primary'" class="!min-h-[44px]" :aria-label="`Zamów ${bean.name}`">
+            Zamów
+          </NuxtLink>
         </div>
       </div>
     </div>
-    <div class="flex flex-wrap gap-1.5 mb-3">
-      <span v-for="tag in bean.tasting" :key="tag" class="font-sans text-[8px] tracking-[1px] uppercase px-2 py-0.5" style="border:1px solid rgba(196,150,58,.2);color:#6b4e1a">{{ tag }}</span>
-    </div>
-    <p class="font-serif italic leading-relaxed pt-3" style="font-size:13px;color:#a8927a;border-top:1px solid rgba(196,150,58,.06)">{{ bean.description }}</p>
-    <div class="flex justify-between items-center mt-4 pt-3" style="border-top:1px solid rgba(196,150,58,.06)">
-      <span class="font-serif font-light" style="font-size:18px;color:#C4963A">{{ bean.price }} <small class="font-sans font-extralight text-[12px]" style="color:#5a4935">zł / 100g</small></span>
-      <NuxtLink to="/preorder">
-        <button class="font-sans text-[9px] tracking-[2px] uppercase px-4 py-2 relative overflow-hidden" style="border:1px solid rgba(196,150,58,.28);color:#C4963A;background:transparent;cursor:none">
-          <span class="btn-fill-b" /><span class="relative z-10">Zamów</span>
-        </button>
-      </NuxtLink>
-    </div>
-  </div>
+  </article>
 </template>
 
 <script setup lang="ts">
 import type { CoffeeBean } from '~/types'
-const props = defineProps<{ bean: CoffeeBean }>()
-const h = ref(false)
-const bars = computed(()=>[
-  ['Czekolada', props.bean.flavorProfile.chocolate],
-  ['Cytrus',    props.bean.flavorProfile.citrus],
-  ['Ferment',   props.bean.flavorProfile.ferment],
-  ['Floral',    props.bean.flavorProfile.floral],
+
+const props = defineProps<{ bean: CoffeeBean; match: number; best?: boolean }>()
+
+const flavorRows = computed(() => [
+  { label: 'Czekolada', value: props.bean.flavorProfile.chocolate },
+  { label: 'Cytrus',    value: props.bean.flavorProfile.citrus },
+  { label: 'Ferment',   value: props.bean.flavorProfile.ferment },
+  { label: 'Kwiaty',    value: props.bean.flavorProfile.floral },
 ])
 </script>
-
-<style scoped>
-.btn-fill-b{position:absolute;inset:0;background:#C4963A;transform:scaleX(0);transform-origin:left;transition:transform .3s cubic-bezier(.23,1,.32,1)}
-button:hover .btn-fill-b{transform:scaleX(1)}
-button:hover span[class="relative z-10"]{color:#080503}
-</style>

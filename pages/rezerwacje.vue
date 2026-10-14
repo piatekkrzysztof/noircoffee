@@ -1,67 +1,71 @@
 <template>
-  <!-- HERO -->
-  <div class="relative overflow-hidden flex items-end" style="height:42vh;min-height:280px;padding:40px 48px">
-    <div class="absolute inset-0 bg-cover bg-center" style="background-image:url('/images/pour.jpg');filter:brightness(.38)" />
-    <div class="absolute inset-0" style="background:linear-gradient(to top,rgba(28,19,13,1) 0%,rgba(28,19,13,.2) 100%)" />
-    <div class="relative z-10">
-      <div class="font-sans font-extralight text-[9px] tracking-[6px] uppercase text-brass mb-3">/ Rezerwacje</div>
-      <h1 class="font-serif font-light text-cream" style="font-size:clamp(32px,5vw,64px)">
-        Zarezerwuj <em class="italic text-brass">swój rytuał</em>
-      </h1>
-    </div>
-  </div>
-
-  <section class="px-12 py-20" style="background:#1c130d">
-    <div class="grid gap-16" style="grid-template-columns:1fr 1fr">
-      <div>
-        <p class="font-serif text-[15px] text-cream-dim leading-[1.85] mb-7">
-          Noir oferuje prywatne przestrzenie dla osób poszukujących skupienia.
-          Zarezerwuj stolik w salonie degustacyjnym, gabinecie szachowym lub loży przy palenisku.
-        </p>
-
-        <div class="flex flex-col gap-3.5 mb-8">
-          <div v-for="feat in features" :key="feat" class="flex gap-3.5 items-start">
-            <div class="w-1.5 h-1.5 rounded-full flex-shrink-0 mt-1.5" style="background:#C4963A" />
-            <p class="font-sans text-[12px] text-cream-dim leading-relaxed">{{ feat }}</p>
-          </div>
+  <div>
+    <!-- HERO: the street, the title beneath it -->
+    <header class="pt-[var(--nav-h)]">
+      <div class="h-[40svh] overflow-hidden md:h-[48svh]">
+        <img src="/images/found/florianska-mariacki.jpg" alt="Ulica Floriańska z widokiem na wieże Kościoła Mariackiego" class="h-full w-full object-cover object-[center_35%]" />
+      </div>
+      <div class="shell grid gap-6 pb-6 pt-10 md:grid-cols-12 md:items-end">
+        <h1 class="t-1 fade-up md:col-span-7">Zarezerwuj <em class="italic text-brass">swój rytuał</em></h1>
+        <div class="md:col-span-4 md:col-start-9">
+          <p class="lede fade-up fade-up-delay-1">
+            Cztery sale przy Floriańskiej 28. Odpowiadamy na każdą rezerwację w ciągu dwóch godzin w czasie otwarcia.
+          </p>
+          <a href="#formularz" class="btn-primary mt-6 fade-up fade-up-delay-2 md:hidden">Przejdź do formularza</a>
         </div>
+      </div>
+    </header>
 
-        <div class="p-6 mb-8" style="border:1px solid rgba(196,150,58,.15);background:rgba(196,150,58,.03)">
-          <div class="font-sans font-extralight text-[9px] tracking-[4px] uppercase text-brass mb-2">Godziny otwarcia</div>
-          <p class="font-serif text-[15px] text-cream-dim leading-loose">
-            Pon–Pt: 8:00–21:00<br>Sob–Nd: 9:00–22:00
+    <!-- CONTENT -->
+    <section class="shell grid gap-16 pb-8 pt-16 md:pt-24 lg:grid-cols-12 lg:gap-6">
+      <!-- Info -->
+      <div class="lg:col-span-5">
+        <h2 v-reveal class="t-2">Co dostajesz przy stoliku</h2>
+        <ul class="mt-6 flex flex-col gap-4">
+          <li v-for="(feat, i) in features" :key="feat" v-reveal="i * 70" class="flex gap-4 text-[18px] leading-relaxed text-cream">
+            <span class="mt-3 h-1.5 w-1.5 shrink-0 rounded-full bg-brass" aria-hidden="true" />
+            {{ feat }}
+          </li>
+        </ul>
+
+        <div v-reveal class="mt-12 bg-surface p-7">
+          <dl class="grid grid-cols-[auto_1fr] gap-x-5 gap-y-1 text-[18px] text-cream">
+            <dt>Poniedziałek–piątek</dt><dd class="text-right tabular-nums">8:00–21:00</dd>
+            <dt>Sobota i niedziela</dt><dd class="text-right tabular-nums">9:00–22:00</dd>
+          </dl>
+          <p class="mt-5 text-[18px] text-cream">
+            Wolisz zadzwonić? <a href="tel:+48124317709" class="underline decoration-brass/40 underline-offset-4 transition-colors hover:text-brass-light">+48 12 431 77 09</a>
           </p>
         </div>
 
-        <div class="grid grid-cols-2 gap-3">
-          <div v-for="space in spaces" :key="space.name" class="p-4" style="border:1px solid rgba(196,150,58,.12);background:#130c08">
-            <div class="font-sans text-[9px] tracking-[2px] uppercase text-brass mb-1">{{ space.capacity }}</div>
-            <div class="font-serif text-[14px] font-light text-cream">{{ space.name }}</div>
+        <div class="mt-12 grid grid-cols-5 gap-3">
+          <img v-reveal src="/images/pour.jpg" alt="Mleko wlewane do filiżanki czarnej kawy" loading="lazy" class="col-span-3 aspect-[3/4] w-full object-cover" />
+          <div class="col-span-2 flex flex-col gap-3">
+            <img v-reveal="90" src="/images/found/brama-noc.jpg" alt="Brama Floriańska nocą" loading="lazy" class="aspect-[3/4] w-full object-cover" />
+            <img v-reveal="160" src="/images/found/portal-3.jpg" alt="Renesansowy portal kamienicy przy Floriańskiej 3" loading="lazy" class="aspect-square w-full object-cover" />
           </div>
         </div>
       </div>
-      <div><ReservationForm /></div>
-    </div>
-  </section>
+
+      <!-- Form -->
+      <div id="formularz" v-reveal class="scroll-mt-[calc(var(--nav-h)+16px)] bg-surface p-6 sm:p-10 lg:col-span-6 lg:col-start-7 lg:self-start">
+        <h2 class="t-2 mb-8">Formularz rezerwacji</h2>
+        <ReservationForm />
+      </div>
+    </section>
+  </div>
 </template>
 
 <script setup lang="ts">
 useSeoMeta({
   title: 'Rezerwacje · Noir Kraków',
-  description: 'Zarezerwuj stolik w Noir — atelier sensorycznym w Krakowie.',
+  description: 'Zarezerwuj stolik w Noir, atelier sensorycznym w Krakowie.',
 })
 
 const features = [
-  'Cupping menu — przewodnik po profilu sensorycznym wybranego origin',
-  'Brewing masterclass dla grup do 6 osób',
-  'Dedykowany kawer oprowadza przez świat micro-lotów',
-  'Preorder wybranego ziarna z odbiorem lub dostawą',
-]
-
-const spaces = [
-  { name: 'Salon Degustacyjny',  capacity: 'do 6 osób' },
-  { name: 'Gabinet Szachowy',    capacity: 'do 4 osób' },
-  { name: 'Loża przy Palenisku', capacity: 'do 8 osób' },
-  { name: 'Bar Barista',         capacity: 'do 2 osób' },
+  'Menu cuppingowe: przewodnik po profilu wybranego originu',
+  'Masterclass parzenia dla grup do 6 osób',
+  'Barista, który oprowadza po micro-lotach przy stoliku',
+  'Preorder wybranego ziarna z odbiorem na miejscu',
 ]
 </script>
