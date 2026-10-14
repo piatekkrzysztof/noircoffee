@@ -1,12 +1,18 @@
 <template>
-  <section class="px-12 py-20" style="background:#130c08;padding-top:108px">
-    <div class="font-sans font-extralight text-[9px] tracking-[6px] uppercase text-brass mb-3">/ Odkryj smaki</div>
-    <h1 class="font-serif font-light text-cream" style="font-size:clamp(32px,4.5vw,56px)">
-      Znajdź swój<br><em class="italic text-brass">profil smakowy</em>
-    </h1>
-    <div class="w-14 h-px my-7" style="background:#8a6924" />
-    <FlavorExplorer />
-  </section>
+  <div>
+    <PageIntro>
+      <template #title>
+        Znajdź swój<br><em class="italic text-brass">profil smakowy</em>
+      </template>
+      <template #lede>
+        Ustaw cztery suwaki tak, jak lubisz pić kawę. Pokażemy micro-loty z baru przy Floriańskiej, które najbliżej trafiają w Twój profil. Przerywana linia na wykresie to najlepsze z nich.
+      </template>
+    </PageIntro>
+
+    <section class="shell pb-32">
+      <FlavorExplorer />
+    </section>
+  </div>
 </template>
 
 <script setup lang="ts">

@@ -1,40 +1,57 @@
 <template>
-  <div
-    class="group relative overflow-hidden cursor-none"
-    style="background:#080503;padding:28px;transition:background .3s"
-    @mouseenter="h=true" @mouseleave="h=false"
-    :style="h?'background:#110b06':''"
-  >
-    <div class="absolute inset-0 transition-opacity duration-300" style="background:linear-gradient(135deg,rgba(196,150,58,.04) 0%,transparent 60%)" :style="{opacity:h?1:0}" />
-    <div class="font-serif font-light" style="font-size:42px;color:#C4963A;line-height:1;margin-bottom:2px">{{ day }}</div>
-    <div class="font-sans font-extralight text-[8px] tracking-[4px] uppercase" style="color:#5a4935;margin-bottom:20px">{{ monthYear }}</div>
-    <div class="inline-block font-sans text-[8px] tracking-[2px] uppercase px-2 py-1 mb-3" style="border:1px solid rgba(196,150,58,.28);color:#C4963A">{{ event.tag }}</div>
-    <div class="font-serif font-light leading-tight mb-2.5" style="font-size:18px;color:#EFD9BC">{{ event.title }}</div>
-    <div class="font-sans text-[11px] leading-relaxed" style="color:#5a4935">{{ event.startTime }}–{{ event.endTime }}<br>{{ event.price }} zł / os.</div>
-    <div class="flex justify-between items-center mt-4 pt-4 relative z-10" style="border-top:1px solid rgba(196,150,58,.08)">
-      <span class="font-sans text-[9px] tracking-[1px] uppercase" style="color:#5a4935">
-        Miejsca: <span style="color:#C4963A;font-weight:400">{{ event.spotsLeft }}/{{ event.spotsTotal }}</span>
-      </span>
-      <NuxtLink to="/rezerwacje">
-        <button class="font-sans text-[8px] tracking-[2px] uppercase px-3.5 py-2 relative overflow-hidden" style="background:transparent;border:1px solid rgba(196,150,58,.28);color:#C4963A;cursor:none">
-          <span class="btn-fill-ev" />
-          <span class="relative z-10">Zapisz się</span>
-        </button>
+  <article v-reveal class="group grid gap-5 bg-surface p-6 transition-colors duration-300 hover:bg-surface2 lg:grid-cols-[110px_1fr_200px_auto] lg:items-center lg:gap-8 md:p-8">
+    <!-- Date -->
+    <p class="flex items-baseline gap-3 lg:block">
+      <span class="font-serif text-[56px] font-light leading-none text-brass-light">{{ Number(date.day) }}</span>
+      <span class="text-[16px] text-cream-dim lg:mt-1 lg:block">{{ date.month }}, {{ date.weekday }}</span>
+    </p>
+
+    <!-- Title -->
+    <div>
+      <h3 class="t-2 transition-colors duration-300 group-hover:text-brass-light">{{ event.title }}</h3>
+      <p class="mt-2 text-[16px] text-cream-dim">{{ event.tag }}, {{ event.startTime }}–{{ event.endTime }}<template v-if="event.instructor">, prowadzi {{ event.instructor }}</template></p>
+      <p v-if="event.description" class="mt-2 max-w-[56ch] text-[16px] leading-relaxed text-cream">
+        {{ event.description }}
+      </p>
+    </div>
+
+    <!-- Spots -->
+    <div>
+      <p class="mb-2 text-[16px]" :class="low ? 'font-medium text-brass-light' : 'text-cream-dim'">{{ spotsLabel }}</p>
+      <div class="flex gap-[3px]" aria-hidden="true">
+        <span
+          v-for="n in event.spotsTotal"
+          :key="n"
+          class="h-1.5 flex-1"
+          :class="n <= event.spotsTotal - event.spotsLeft ? 'bg-surface3' : 'bg-brass'"
+        />
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="flex items-center justify-between gap-6 lg:flex-col lg:items-end lg:gap-3">
+      <span class="t-2 leading-none">{{ event.price }} zł</span>
+      <NuxtLink
+        :to="{ path: '/rezerwacje', query: { warsztat: event.id } }"
+        class="btn-primary !min-h-[44px]"
+        :aria-label="`Zapisz się: ${event.title}`"
+      >
+        Zapisz się
       </NuxtLink>
     </div>
-  </div>
+  </article>
 </template>
 
 <script setup lang="ts">
 import type { Event } from '~/types'
-const props = defineProps<{ event: Event }>()
-const h = ref(false)
-const day = computed(() => new Date(props.event.date).getDate().toString().padStart(2,'0'))
-const monthYear = computed(() => new Date(props.event.date).toLocaleDateString('pl-PL',{month:'short',year:'numeric'}).toUpperCase())
-</script>
 
-<style scoped>
-.btn-fill-ev{position:absolute;inset:0;background:#C4963A;transform:scaleX(0);transform-origin:left;transition:transform .3s cubic-bezier(.23,1,.32,1)}
-button:hover .btn-fill-ev{transform:scaleX(1)}
-button:hover span[class="relative z-10"]{color:#080503}
-</style>
+const props = defineProps<{ event: Event }>()
+
+const date = computed(() => formatEventDate(props.event.date))
+const low = computed(() => props.event.spotsLeft <= 2)
+const spotsLabel = computed(() => {
+  const { spotsLeft: n, spotsTotal: t } = props.event
+  if (n === 1) return 'Zostało ostatnie miejsce'
+  return `${n} z ${t} miejsc wolnych`
+})
+</script>

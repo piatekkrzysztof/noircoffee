@@ -22,6 +22,7 @@ export interface CoffeeBean {
   description: string
   tasting: string[]    // e.g. ['jaśmin', 'bergamotka', 'biała herbata']
   imageUrl?: string
+  imageAlt?: string
   price: number        // PLN / 100g
   inStock: boolean
 }

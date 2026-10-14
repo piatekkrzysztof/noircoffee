@@ -1,52 +1,121 @@
 <template>
-  <section class="px-12 py-20" style="background:#0b0704;padding-top:108px">
-    <div class="font-sans font-extralight text-[9px] tracking-[6px] uppercase text-brass mb-3">/ Warsztaty & Degustacje</div>
-    <h1 class="font-serif font-light text-cream" style="font-size:clamp(32px,4.5vw,56px)">
-      Kalendarium <em class="italic text-brass">sensoryczne</em>
-    </h1>
-    <div class="w-14 h-px my-7" style="background:#8a6924" />
+  <div>
+    <PageIntro image="/images/found/cupping-stol.jpg" image-alt="Rząd czarek z kawą przygotowanych do cuppingu, w tle ceglana ściana" focus="center 60%">
+      <template #title>
+        Kalendarium <em class="italic text-brass">sensoryczne</em>
+      </template>
+      <template #lede>
+        Cupping, masterclassy i wykłady w grupach do dwudziestu osób. W cenie degustacja, karta cuppingowa i kawa do zabrania.
+      </template>
+    </PageIntro>
 
-    <!-- Filtry -->
-    <div class="flex gap-3 mb-10 flex-wrap">
-      <button
-        v-for="tag in ['Wszystkie', ...tags]" :key="tag"
-        class="font-sans text-[9px] tracking-[2px] uppercase px-4 py-2 transition-all duration-200 cursor-pointer"
-        :style="activeTag === tag
-          ? 'background:#C4963A;color:#0b0704;border:1px solid #C4963A'
-          : 'background:transparent;color:#b8a48e;border:1px solid rgba(196,150,58,.25)'"
-        @click="activeTag = tag"
-      >
-        {{ tag }}
-      </button>
-    </div>
+    <section class="shell pb-8 pt-16 md:pt-24">
+      <!-- Filters -->
+      <div class="flex flex-wrap gap-2" role="group" aria-label="Filtruj według rodzaju">
+        <button
+          v-for="tag in ['Wszystkie', ...tags]"
+          :key="tag"
+          type="button"
+          class="chip"
+          :aria-pressed="activeTag === tag"
+          @click="activeTag = tag"
+        >
+          {{ tag }}
+          <span class="tabular-nums opacity-70">{{ countFor(tag) }}</span>
+        </button>
+      </div>
 
-    <div class="grid gap-px" style="grid-template-columns:repeat(3,1fr);background:rgba(196,150,58,.1)">
-      <EventCard v-for="ev in filteredEvents" :key="ev.id" :event="ev" />
-    </div>
-  </section>
+      <div class="mt-10 flex flex-col gap-3">
+        <TransitionGroup name="fade">
+          <EventCard v-for="ev in filteredEvents" :key="ev.id" :event="ev" />
+        </TransitionGroup>
+      </div>
+
+      <div v-if="filteredEvents.length === 0" class="bg-surface py-20 text-center">
+        <p class="t-2">Brak terminów w tej kategorii.</p>
+        <p class="mt-3 text-[16px] text-cream-dim">Zapisz się do listu ze stopki, damy znać o nowych datach.</p>
+      </div>
+    </section>
+
+    <!-- What a cupping looks like -->
+    <section class="shell mt-24 md:mt-32" aria-labelledby="how-title">
+      <h2 id="how-title" v-reveal class="t-2">Jak wygląda cupping</h2>
+      <div class="mt-8 grid gap-3 md:grid-cols-12">
+        <figure v-reveal class="md:col-span-7 md:row-span-2">
+          <video
+            ref="clip"
+            class="aspect-[16/10] w-full bg-surface object-cover"
+            src="/images/found/palarnia.webm"
+            poster="/images/found/palarnia-poster.jpg"
+            muted
+            loop
+            playsinline
+            preload="none"
+            aria-label="Świeżo palone ziarna mieszane w bębnie chłodzącym palarni"
+          />
+          <figcaption class="mt-3 text-[16px] text-cream-dim">Zaczynamy od świeżo palonych ziaren. Palenie i odpoczynek zajmują pięć dni.</figcaption>
+        </figure>
+        <figure v-reveal="100" class="md:col-span-5 md:mt-24">
+          <img src="/images/found/cupping-zblizenie.jpg" alt="Degustatorka wącha kawę nad czarką podczas cuppingu" loading="lazy" class="aspect-[4/5] w-full object-cover" />
+          <figcaption class="mt-3 text-[16px] text-cream-dim">Najpierw zapach suchej kawy, potem po zalaniu, potem łyżka.</figcaption>
+        </figure>
+        <figure v-reveal="160" class="md:col-span-4 md:col-start-2 md:mt-10">
+          <img src="/images/found/owoce-kawowca.jpg" alt="Dojrzałe czerwone owoce kawowca na gałązce" loading="lazy" class="aspect-[3/2] w-full object-cover" />
+          <figcaption class="mt-3 text-[16px] text-cream-dim">Na koniec rozmawiamy o tym, skąd przyjechał owoc i kto go zebrał.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- Private group -->
+    <section class="mt-24 bg-brass py-20 text-espresso md:mt-32 md:py-28">
+      <div class="shell grid gap-10 md:grid-cols-12 md:items-end md:gap-6">
+        <div v-reveal class="md:col-span-7">
+          <h2 class="t-1">Warsztat dla firmy albo <em class="italic">na urodziny</em></h2>
+          <p class="mt-6 max-w-[48ch] text-[18px] leading-relaxed">
+            Ustalamy termin, program i liczbę osób, do dwunastu. Cupping w grupie prywatnej zaczyna się od 180 zł za osobę, w Salonie degustacyjnym albo w Loży przy palenisku.
+          </p>
+        </div>
+        <div v-reveal="100" class="md:col-span-4 md:col-start-9 md:justify-self-end">
+          <NuxtLink to="/rezerwacje" class="btn-dark">
+            Zapytaj o termin
+            <svg class="btn-arrow" width="14" height="10" viewBox="0 0 14 10" fill="none" aria-hidden="true"><path d="M1 5h12m0 0L9 1m4 4L9 9" stroke="currentColor" stroke-width="1.2" /></svg>
+          </NuxtLink>
+        </div>
+      </div>
+    </section>
+  </div>
 </template>
 
 <script setup lang="ts">
-import type { Event } from '~/types'
-
 useSeoMeta({
   title: 'Warsztaty · Noir Kraków',
-  description: 'Warsztaty cuppingowe, brewing masterclassy i degustacje w Krakowie.',
+  description: 'Warsztaty cuppingowe, brewing masterclassy i degustacje w Noir Coffee Atelier Kraków.',
 })
 
-const tags = ['Cupping', 'Masterclass', 'Warsztat', 'Wykład', 'Prywatny']
+const { all: allEvents, tags } = useEvents()
+
 const activeTag = ref('Wszystkie')
 
-const allEvents: Event[] = [
-  { id:'1', title:'Wulkan & Aromat: Kawa z Etiopii',     tag:'Cupping',    date:'2025-05-14', startTime:'14:00', endTime:'17:00', price:220, spotsTotal:8,  spotsLeft:3, description:'Immersyjne spotkanie z etiopską kawą — od mapy po filiżankę.' },
-  { id:'2', title:'Brewing Methods Deep Dive',            tag:'Masterclass', date:'2025-05-21', startTime:'18:00', endTime:'21:00', price:280, spotsTotal:10, spotsLeft:5, description:'V60, Chemex, AeroPress — pełna analiza metod parzenia.' },
-  { id:'3', title:'Kolumbia vs Rwanda: Blind Cupping',   tag:'Prywatny',    date:'2025-05-28', startTime:'19:00', endTime:'22:00', price:350, spotsTotal:6,  spotsLeft:1, description:'Cztery ziarna, dwa kontynenty, zero podpowiedzi.' },
-  { id:'4', title:'Fermentation Lab — Anaerobic',        tag:'Warsztat',    date:'2025-06-04', startTime:'17:00', endTime:'20:00', price:240, spotsTotal:12, spotsLeft:7, description:'Nauka o fermentacji beztlenowej i jej wpływie na smak.' },
-  { id:'5', title:'Gesha Vertical Tasting',              tag:'Cupping',    date:'2025-06-11', startTime:'15:00', endTime:'18:00', price:390, spotsTotal:8,  spotsLeft:2, description:'Trzy roczniki Geshy z Etiopii — rzadkość absolutna.' },
-  { id:'6', title:'Terroir a smak: nauka o origin',      tag:'Wykład',     date:'2025-06-18', startTime:'18:30', endTime:'20:30', price:180, spotsTotal:20, spotsLeft:9, description:'Jak gleba, klimat i odmiana kształtują profil smakowy kawy.' },
-]
-
 const filteredEvents = computed(() =>
-  activeTag.value === 'Wszystkie' ? allEvents : allEvents.filter(e => e.tag === activeTag.value)
+  activeTag.value === 'Wszystkie'
+    ? allEvents
+    : allEvents.filter(e => e.tag === activeTag.value),
 )
+
+function countFor(tag: string) {
+  return tag === 'Wszystkie' ? allEvents.length : allEvents.filter(e => e.tag === tag).length
+}
+
+// The roastery loop plays only while visible, never with reduced motion
+const clip = ref<HTMLVideoElement | null>(null)
+let observer: IntersectionObserver | null = null
+onMounted(() => {
+  if (!clip.value || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+  observer = new IntersectionObserver(([e]) => {
+    if (e.isIntersecting) clip.value?.play().catch(() => {})
+    else clip.value?.pause()
+  }, { threshold: 0.3 })
+  observer.observe(clip.value)
+})
+onBeforeUnmount(() => observer?.disconnect())
 </script>

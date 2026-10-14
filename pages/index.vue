@@ -1,137 +1,249 @@
 <template>
-  <!-- HERO -->
-  <section class="relative flex items-center justify-center overflow-hidden" style="min-height:100vh;padding:100px 48px 80px">
-    <div id="hero-parallax" class="absolute inset-0 bg-cover bg-center will-change-transform" style="background-image:url('/images/hero.jpg')" />
-    <div class="absolute inset-0" style="background:linear-gradient(135deg,rgba(8,5,3,.9) 0%,rgba(8,5,3,.5) 55%,rgba(8,5,3,.72) 100%)" />
-    <div class="hero-grid" />
-    <div class="orb" style="width:400px;height:400px;background:radial-gradient(circle,rgba(196,150,58,.07) 0%,transparent 70%);top:-10%;right:-5%;animation-delay:0s" />
-    <div class="orb" style="width:300px;height:300px;background:radial-gradient(circle,rgba(139,58,42,.08) 0%,transparent 70%);bottom:10%;left:-5%;animation-delay:-7s" />
-
-    <div class="relative z-10 max-w-3xl mx-auto text-center">
-      <!-- Eyebrow -->
-      <div class="flex items-center justify-center gap-5 mb-8" style="opacity:0;animation:fadeUp .8s .2s ease forwards">
-        <span style="width:56px;height:1px;background:linear-gradient(to right,transparent,#C4963A)" />
-        <span class="font-sans font-extralight text-[9px] tracking-[6px] uppercase" style="color:#C4963A">Atelier Sensoryczne · Kraków · od 2019</span>
-        <span style="width:56px;height:1px;background:linear-gradient(to left,transparent,#C4963A)" />
+  <div>
+    <!-- HERO: the street at night, the name beneath it like a film title -->
+    <section class="hero relative flex h-[100svh] min-h-[600px] flex-col overflow-hidden">
+      <div class="relative h-[50%] overflow-hidden md:h-[58%]">
+        <img
+          src="/images/found/florianska-noc.jpg"
+          alt="Ulica Floriańska w Krakowie nocą: oświetlone kamienice i przechodnie na bruku"
+          width="1920"
+          height="1280"
+          fetchpriority="high"
+          class="hero-photo h-full w-full object-cover object-[center_62%]"
+        />
       </div>
 
-      <!-- Title with word reveal -->
-      <h1 class="font-serif font-light leading-[.88]" style="font-size:clamp(48px,7.5vw,96px);letter-spacing:-1px">
-        <span style="display:block;overflow:hidden">
-          <span class="title-word" style="animation-delay:.4s;color:#EFD9BC">Gdzie&nbsp;</span>
-          <span class="title-word" style="animation-delay:.55s;color:#EFD9BC">kawa</span>
-        </span>
-        <span style="display:block;overflow:hidden;margin-top:4px">
-          <span class="title-word" style="animation-delay:.7s;color:#EFD9BC">staje&nbsp;</span>
-          <span class="title-word" style="animation-delay:.82s;color:#EFD9BC">się&nbsp;</span>
-          <span class="title-word font-serif italic" style="animation-delay:.94s;color:#C4963A">rytuałem</span>
-        </span>
-      </h1>
-
-      <p class="font-serif italic leading-relaxed max-w-md mx-auto" style="font-size:clamp(14px,1.8vw,17px);color:#a8927a;margin:28px auto 48px;opacity:0;animation:fadeUp .8s 1s ease forwards">
-        Przestrzeń dla tych, którzy wiedzą, że smak to filozofia. Micro-loty, warsztaty cuppingowe i rezerwacje prywatne.
-      </p>
-
-      <div class="flex gap-4 justify-center flex-wrap mag-wrap" style="opacity:0;animation:fadeUp .8s 1.2s ease forwards">
-        <NuxtLink to="/smaki">
-          <button class="mag-btn font-sans font-light text-[10px] tracking-[3px] uppercase px-10 py-4 relative overflow-hidden" style="background:#C4963A;border:none;cursor:none">
-            <span class="relative z-10" style="color:#080503">Odkryj smaki</span>
-          </button>
-        </NuxtLink>
-        <NuxtLink to="/rezerwacje">
-          <button class="mag-btn font-sans font-light text-[10px] tracking-[3px] uppercase px-10 py-4" style="background:transparent;color:#EFD9BC;border:1px solid rgba(239,217,188,.22);cursor:none">
+      <div class="shell flex flex-1 flex-col justify-between pb-4 pt-6 md:pb-5">
+        <div class="flex flex-col gap-5 md:flex-row md:items-start md:justify-between">
+          <p class="max-w-[46ch] text-[18px] leading-relaxed text-cream fade-up">
+            Atelier kawowe przy Floriańskiej 28 w Krakowie. Sześć micro-lotów, cupping w małych grupach i cztery sale, w których nikt nie goni. {{ openNow }}
+          </p>
+          <NuxtLink to="/rezerwacje" class="btn-primary hidden self-start fade-up fade-up-delay-1 md:inline-flex">
             Zarezerwuj stolik
-          </button>
+          </NuxtLink>
+        </div>
+
+        <div class="fade-up fade-up-delay-2">
+          <h1 class="wordmark t-mark -ml-[0.04em] text-cream">
+            Noir<span class="sr-only">, atelier kawowe przy ulicy Floriańskiej 28 w Krakowie</span>
+          </h1>
+          <NuxtLink to="/rezerwacje" class="btn-primary mt-4 w-full md:hidden">Zarezerwuj stolik</NuxtLink>
+        </div>
+      </div>
+    </section>
+
+    <!-- ADDRESS: one frame, three distances -->
+    <div class="mt-24 md:mt-10">
+      <AddressShowcase />
+    </div>
+
+    <!-- ON THE BAR: the live list -->
+    <section class="shell mt-32 md:mt-48" aria-label="Micro-loty na barze">
+      <BarList />
+    </section>
+
+    <!-- REGIONS: loose scatter -->
+    <section class="shell mt-40 md:mt-56" aria-labelledby="regions-title">
+      <h2 id="regions-title" v-reveal class="t-2">Regiony</h2>
+
+      <div class="mt-12 grid grid-cols-12 gap-x-6 gap-y-[72px] md:gap-y-0">
+        <NuxtLink
+          v-for="(o, i) in ORIGINS"
+          :key="o.slug"
+          v-reveal
+          :to="`/pochodzenie/${o.slug}`"
+          class="group block"
+          :class="placement(i)"
+        >
+          <p class="mb-3 text-[14px] text-cream-dim">{{ o.country }}, {{ o.region }}, {{ o.altitude }} n.p.m.</p>
+          <div class="overflow-hidden bg-surface" :class="ratio(i)">
+            <img
+              :src="o.imageUrl"
+              :alt="`${o.country}, region ${o.region}`"
+              loading="lazy"
+              class="h-full w-full object-cover transition-transform duration-[1.2s] ease-out group-hover:scale-[1.03]"
+            />
+          </div>
+          <p class="mt-4 flex items-baseline gap-3 text-cream">
+            <span class="t-2 transition-colors group-hover:text-brass-light">{{ o.title }}</span>
+            <svg class="shrink-0 transition-transform duration-300 group-hover:translate-x-1" width="14" height="10" viewBox="0 0 14 10" fill="none" aria-hidden="true"><path d="M1 5h12m0 0L9 1m4 4L9 9" stroke="currentColor" stroke-width="1.2" /></svg>
+          </p>
+          <p class="mt-2 max-w-[48ch] text-[16px] leading-relaxed text-cream">{{ o.lead }}</p>
         </NuxtLink>
+
+        <p v-reveal class="col-span-12 max-w-[24ch] font-serif text-[24px] font-light leading-snug text-cream md:col-span-5 md:col-start-2 md:row-start-3 md:self-center md:text-[clamp(26px,2.3vw,34px)]">
+          Cztery regiony, nie czterdzieści. Każdą farmę znamy z nazwy.
+        </p>
       </div>
+    </section>
+
+    <!-- WORKSHOPS: a field of brass -->
+    <section class="mt-32 bg-brass py-24 text-espresso md:mt-44 md:py-32" aria-labelledby="workshops-title">
+      <div class="shell grid gap-14 lg:grid-cols-12 lg:gap-8">
+        <div class="lg:col-span-5">
+          <h2 id="workshops-title" v-reveal class="t-1">Cupping przy Floriańskiej</h2>
+          <p v-reveal="80" class="mt-6 max-w-[38ch] text-[18px] leading-relaxed">
+            Siadamy przy jednym stole, osiem osób najwyżej. Pięć czarek, łyżka, karta do zabrania. Bez żargonu i bez ocen.
+          </p>
+          <img
+            v-reveal="140"
+            src="/images/found/cupping-stol.jpg"
+            alt="Czarki z kawą ustawione w rzędzie do cuppingu"
+            loading="lazy"
+            class="mt-10 hidden aspect-[4/3] w-full max-w-[460px] object-cover lg:block"
+          />
+        </div>
+
+        <div class="lg:col-span-7 lg:col-start-6">
+          <ul class="flex flex-col gap-3">
+            <li v-for="(ev, i) in featuredEvents" :key="ev.id" v-reveal="i * 80">
+              <NuxtLink
+                :to="{ path: '/rezerwacje', query: { warsztat: ev.id } }"
+                class="group grid grid-cols-[auto_1fr] gap-x-6 gap-y-3 bg-brass-light/50 p-6 transition-colors duration-300 hover:bg-brass-light sm:grid-cols-[96px_1fr_auto] sm:items-center md:p-8"
+              >
+                <span class="font-serif text-[56px] font-light leading-none">
+                  {{ Number(formatEventDate(ev.date).day) }}
+                  <span class="block font-sans text-[16px] font-normal leading-tight">{{ formatEventDate(ev.date).month }}, {{ formatEventDate(ev.date).weekday }}</span>
+                </span>
+                <span>
+                  <h3 class="t-2">{{ ev.title }}</h3>
+                  <span class="mt-2 block text-[16px]">{{ ev.tag }}, {{ ev.startTime }}–{{ ev.endTime }}, prowadzi {{ ev.instructor }}</span>
+                </span>
+                <span class="col-span-2 flex items-center justify-between gap-6 sm:col-span-1 sm:flex-col sm:items-end sm:gap-1">
+                  <span class="t-2 leading-none">{{ ev.price }} zł</span>
+                  <span class="text-[16px]" :class="ev.spotsLeft <= 2 ? 'font-medium' : ''">
+                    {{ ev.spotsLeft === 1 ? 'zostało 1 miejsce' : `${ev.spotsLeft} z ${ev.spotsTotal} miejsc wolnych` }}
+                  </span>
+                </span>
+              </NuxtLink>
+            </li>
+          </ul>
+          <NuxtLink to="/warsztaty" class="btn-dark mt-8">
+            Wszystkie terminy ({{ events.all.length }})
+            <svg class="btn-arrow" width="14" height="10" viewBox="0 0 14 10" fill="none" aria-hidden="true"><path d="M1 5h12m0 0L9 1m4 4L9 9" stroke="currentColor" stroke-width="1.2" /></svg>
+          </NuxtLink>
+        </div>
+      </div>
+    </section>
+
+    <!-- GALLERY: drag row -->
+    <div class="mt-40 md:mt-56">
+      <DragGallery />
     </div>
 
-    <!-- Scroll indicator -->
-    <div class="absolute bottom-9 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3" style="opacity:0;animation:fadeUp .8s 1.6s ease forwards">
-      <div style="width:1px;height:48px;background:rgba(196,150,58,.15);overflow:hidden;position:relative">
-        <div style="width:100%;height:50%;background:#C4963A;animation:scrollPulse 2s ease-in-out infinite" />
+    <!-- VISIT: card on a photograph -->
+    <section class="relative mt-40 md:mt-56 md:min-h-[100svh]" aria-labelledby="visit-title">
+      <div class="relative h-[70svh] overflow-hidden md:absolute md:inset-0 md:h-auto">
+        <img
+          src="/images/found/brama-ulica.jpg"
+          alt="Ulica Floriańska w ciągu dnia, na jej końcu Brama Floriańska"
+          loading="lazy"
+          class="drift h-full w-full object-cover object-[center_40%]"
+        />
       </div>
-      <span class="font-sans font-extralight text-[8px] tracking-[4px] uppercase" style="color:#5a4935">Przewiń</span>
-    </div>
-  </section>
 
-  <!-- MARQUEE STRIP -->
-  <div style="background:#C4963A;overflow:hidden;padding:12px 0;border-top:1px solid rgba(0,0,0,.2);border-bottom:1px solid rgba(0,0,0,.2)">
-    <div style="display:flex;width:max-content;animation:marqueeScroll 22s linear infinite">
-      <span v-for="item in marqueeItems" :key="item" class="font-serif font-light italic" style="font-size:16px;color:#080503;white-space:nowrap;padding:0 32px;letter-spacing:2px">{{ item }}</span>
-      <span v-for="item in marqueeItems" :key="'b'+item" class="font-serif font-light italic" style="font-size:16px;color:#080503;white-space:nowrap;padding:0 32px;letter-spacing:2px">{{ item }}</span>
-    </div>
+      <div class="relative px-4 md:absolute md:right-[60px] md:top-[60px] md:px-0">
+        <div v-reveal class="-mt-20 bg-paper p-8 text-espresso md:mt-0 md:w-[420px]">
+          <h2 id="visit-title" class="t-2">Floriańska 28</h2>
+          <p class="mt-4 text-[16px] leading-relaxed">
+            ul. Floriańska 28, 31-021 Kraków<br>kilka minut od Bramy Floriańskiej
+          </p>
+
+          <dl class="mt-6 grid grid-cols-[1fr_auto] gap-x-6 gap-y-1 text-[16px]">
+            <dt>Poniedziałek–piątek</dt><dd class="tabular-nums">8:00–21:00</dd>
+            <dt>Sobota i niedziela</dt><dd class="tabular-nums">9:00–22:00</dd>
+          </dl>
+
+          <h3 class="mt-7 text-[16px] font-medium">Sale do rezerwacji</h3>
+          <dl class="mt-2 grid grid-cols-[1fr_auto] gap-x-6 gap-y-1 text-[16px]">
+            <template v-for="s in spaces" :key="s.name">
+              <dt>{{ s.name }}</dt><dd class="tabular-nums">do {{ s.max }} osób</dd>
+            </template>
+          </dl>
+
+          <p class="mt-6 text-[16px]">
+            <a href="tel:+48124317709" class="underline decoration-espresso/30 underline-offset-4 hover:decoration-espresso">+48 12 431 77 09</a>
+          </p>
+
+          <NuxtLink to="/rezerwacje" class="btn-dark mt-7 !min-h-[52px] w-full">Zarezerwuj stolik</NuxtLink>
+        </div>
+      </div>
+    </section>
   </div>
-
-  <!-- EVENTS TEASER -->
-  <section style="padding:88px 48px;background:#080503">
-    <div class="reveal s-label">/ Najbliższe warsztaty</div>
-    <h2 class="reveal delay-1 font-serif font-light" style="font-size:clamp(32px,4.5vw,52px);margin-top:8px;color:#EFD9BC">
-      Kalendarium <em class="italic" style="color:#C4963A">sensoryczne</em>
-    </h2>
-    <div class="reveal delay-2" style="width:56px;height:1px;background:#6b4e1a;margin:28px 0" />
-    <div class="reveal delay-3" style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(196,150,58,.08)">
-      <EventCard v-for="ev in featuredEvents" :key="ev.id" :event="ev" />
-    </div>
-    <div class="reveal delay-4" style="text-align:center;margin-top:36px">
-      <NuxtLink to="/warsztaty">
-        <button class="font-sans font-light text-[10px] tracking-[3px] uppercase px-8 py-3 relative overflow-hidden" style="background:transparent;color:#EFD9BC;border:1px solid rgba(239,217,188,.2);cursor:none">
-          Wszystkie warsztaty
-        </button>
-      </NuxtLink>
-    </div>
-  </section>
-
-  <!-- ORIGINS TEASER -->
-  <section style="padding:88px 48px;background:#110b06">
-    <div class="reveal s-label">/ Pochodzenie kawy</div>
-    <h2 class="reveal delay-1 font-serif font-light" style="font-size:clamp(32px,4.5vw,52px);margin-top:8px;color:#EFD9BC">
-      Skąd pochodzi<br><em class="italic" style="color:#C4963A">Twoja kawa</em>
-    </h2>
-    <div class="reveal delay-2" style="width:56px;height:1px;background:#6b4e1a;margin:28px 0" />
-    <div class="reveal delay-3" style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(196,150,58,.08)">
-      <OriginCard v-for="o in featuredOrigins" :key="o.id" :origin="o" />
-    </div>
-    <div class="reveal delay-4" style="text-align:center;margin-top:36px">
-      <NuxtLink to="/pochodzenie">
-        <button class="font-sans font-light text-[10px] tracking-[3px] uppercase px-8 py-3" style="background:transparent;color:#EFD9BC;border:1px solid rgba(239,217,188,.2);cursor:none">
-          Wszystkie originy
-        </button>
-      </NuxtLink>
-    </div>
-  </section>
-
-  <NewsletterBlock />
 </template>
 
 <script setup lang="ts">
-import type { Event, OriginStory } from '~/types'
+import { ORIGINS } from '~/data/origins'
 
 useSeoMeta({
-  title: 'Noir · Kraków Coffee Atelier',
-  description: 'Atelier sensoryczne. Micro-loty, warsztaty cuppingowe i rezerwacje prywatne w Krakowie.',
+  title: 'Noir · atelier kawowe, Floriańska 28, Kraków',
+  description: 'Atelier kawowe przy Floriańskiej 28 w Krakowie. Sześć micro-lotów z kartami cuppingowymi, cupping w małych grupach i cztery sale do rezerwacji.',
+  ogTitle: 'Noir · Floriańska 28, Kraków',
+  ogDescription: 'Micro-loty, cupping w małych grupach i cztery prywatne sale na Drodze Królewskiej.',
+  ogImage: '/images/found/florianska-noc.jpg',
 })
 
-const marqueeItems = [
-  'Etiopia · Yirgacheffe','Kolumbia · Huila','Gwatemala · Huehuetenango',
-  'Rwanda · Nyamasheke','Brazylia · Sul de Minas','Gesha · Jimma',
-  'Specialty Coffee · SCA','Washed · Natural · Anaerobic',
+const events = useEvents()
+const featuredEvents = events.all.slice(0, 3)
+
+const spaces = [
+  { name: 'Salon degustacyjny',  max: 6 },
+  { name: 'Gabinet szachowy',    max: 4 },
+  { name: 'Loża przy palenisku', max: 8 },
+  { name: 'Bar',                 max: 2 },
 ]
 
-const featuredEvents: Event[] = [
-  { id:'1', title:'Wulkan & Aromat: Kawa z Etiopii',   tag:'Cupping',    date:'2025-05-14', startTime:'14:00', endTime:'17:00', price:220, spotsTotal:8,  spotsLeft:3, description:'' },
-  { id:'2', title:'Brewing Methods Deep Dive',          tag:'Masterclass', date:'2025-05-21', startTime:'18:00', endTime:'21:00', price:280, spotsTotal:10, spotsLeft:5, description:'' },
-  { id:'3', title:'Kolumbia vs Rwanda: Blind Cupping', tag:'Prywatny',    date:'2025-05-28', startTime:'19:00', endTime:'22:00', price:350, spotsTotal:6,  spotsLeft:1, description:'' },
-]
+// Scatter placements on the 12-column grid: left 3:2, right 4:5 (overlapping), inset 16:9, then left again
+function placement(i: number) {
+  return [
+    'col-span-12 md:col-span-6 md:row-start-1',
+    'col-span-10 col-start-3 md:col-span-4 md:col-start-9 md:row-start-1 md:mt-[14vh]',
+    'col-span-11 md:col-span-7 md:col-start-3 md:row-start-2 md:mt-[16vh]',
+    'col-span-12 md:col-span-4 md:col-start-9 md:row-start-3 md:-mt-[4vh]',
+  ][i]
+}
 
-const featuredOrigins: OriginStory[] = [
-  { id:'01', slug:'etiopia',  country:'Etiopia',  region:'Yirgacheffe', title:'Kolebka kawy',        body:'Yirgacheffe to święta ziemia każdego coffee geeka. Na wysokości 1900–2200 m n.p.m., dojrzewają ziarna o profilu, który zmienił świat.',           altitude:'1900–2200m', processing:'Washed',       imageUrl:'/images/ethiopia.jpg' },
-  { id:'02', slug:'kolumbia', country:'Kolumbia', region:'Huila',       title:'Kraj mikroklimatów',   body:'Dolina rzeki Magdalena kryje tysiące małych ferm, gdzie każda rodzina uprawia swoją własną historię smakową.',                                  altitude:'1500–2000m', processing:'Natural/Honey', imageUrl:'/images/colombia.jpg' },
-]
+function ratio(i: number) {
+  return ['aspect-[3/2]', 'aspect-[4/5]', 'aspect-[16/9]', 'aspect-[4/5]'][i]
+}
+
+// Opening hours line, filled in on the client so the server markup stays stable
+const openNow = ref('')
+onMounted(() => {
+  const now = new Date()
+  const day = now.getDay()
+  const [open, close] = day === 0 || day === 6 ? [9, 22] : [8, 21]
+  const h = now.getHours() + now.getMinutes() / 60
+  openNow.value = h >= open && h < close ? `Dziś otwarte do ${close}:00.` : `Otwieramy o ${open}:00.`
+})
 </script>
 
-<style>
-@keyframes scrollPulse{0%{transform:translateY(-100%)}100%{transform:translateY(200%)}}
-@keyframes marqueeScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-.s-label{font-family:'Jost',sans-serif;font-weight:200;font-size:9px;letter-spacing:6px;text-transform:uppercase;color:#C4963A;margin-bottom:14px}
+<style scoped>
+/* Signature move: the wordmark settles a few percent as the first screen leaves */
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .wordmark {
+      transform-origin: left bottom;
+      animation: settle linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0 100svh;
+    }
+
+    .hero-photo {
+      animation: hero-drift linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0 100svh;
+    }
+  }
+}
+
+@keyframes settle {
+  from { scale: 1; }
+  to   { scale: 0.93; }
+}
+
+@keyframes hero-drift {
+  from { transform: scale(1.06); }
+  to   { transform: scale(1) translateY(4%); }
+}
 </style>

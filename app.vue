@@ -1,7 +1,9 @@
 <template>
   <div>
     <NoirNav />
-    <NuxtPage />
+    <main id="main">
+      <NuxtPage />
+    </main>
     <NoirFooter />
   </div>
 </template>
