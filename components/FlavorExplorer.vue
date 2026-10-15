@@ -59,7 +59,7 @@
     <!-- Results -->
     <div>
       <p v-reveal="80" class="t-2 mb-8" aria-live="polite">
-        {{ matched.length }} {{ beanWord }} pasuje do Twojego profilu
+        {{ matched.length }} {{ beanWord }} do Twojego profilu
       </p>
 
       <TransitionGroup tag="div" name="list" class="relative flex flex-col gap-10">
@@ -106,9 +106,9 @@ const best = computed(() => matched.value[0])
 
 const beanWord = computed(() => {
   const n = matched.value.length
-  if (n === 1) return 'ziarno'
-  if (n >= 2 && n <= 4) return 'ziarna'
-  return 'ziaren'
+  if (n === 1) return 'ziarno pasuje'
+  if (n >= 2 && n <= 4) return 'ziarna pasują'
+  return 'ziaren pasuje'
 })
 
 // diff ranges 0..40 (4 axes x 10)
