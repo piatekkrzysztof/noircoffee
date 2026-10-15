@@ -5,7 +5,7 @@
         Skąd pochodzi <em class="italic text-brass">Twoja kawa</em>
       </template>
       <template #lede>
-        Cztery regiony, cztery historie. Kupujemy bezpośrednio od farm i spółdzielni, więc przy każdym ziarnie wiemy, kto je zebrał i na jakiej wysokości.
+        Kupujemy w czterech krajach, bezpośrednio od farm i spółdzielni. Dlatego przy każdej kawie na barze możemy powiedzieć, kto ją zebrał i na jakiej wysokości rosła.
       </template>
       <template #action>
         <NuxtLink to="/smaki" class="btn-primary">Znajdź swój profil smakowy</NuxtLink>
@@ -54,6 +54,6 @@ import { ORIGINS } from '~/data/origins'
 
 useSeoMeta({
   title: 'Pochodzenie · Noir Kraków',
-  description: 'Poznaj historię i terroir każdego micro-lotu z Noir Coffee Atelier.',
+  description: 'Etiopia, Kolumbia, Gwatemala i Rwanda: skąd pochodzi kawa z baru Noir przy Floriańskiej 28 i dlaczego smakuje tak, a nie inaczej.',
 })
 </script>

@@ -37,7 +37,7 @@ import { CREDITS } from '~/data/credits'
 
 useSeoMeta({
   title: 'Źródła zdjęć · Noir Kraków',
-  description: 'Autorzy i licencje zdjęć oraz filmu użytych na stronie Noir Coffee Atelier.',
+  description: 'Autorzy i licencje zdjęć oraz filmu użytych na stronie Noir przy Floriańskiej 28.',
   robots: 'noindex, follow',
 })
 </script>

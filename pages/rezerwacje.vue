@@ -6,10 +6,10 @@
         <img src="/images/found/florianska-mariacki.jpg" alt="Ulica Floriańska z widokiem na wieże Kościoła Mariackiego" class="h-full w-full object-cover object-[center_35%]" />
       </div>
       <div class="shell grid gap-6 pb-6 pt-10 md:grid-cols-12 md:items-end">
-        <h1 class="t-1 fade-up md:col-span-7">Zarezerwuj <em class="italic text-brass">swój rytuał</em></h1>
+        <h1 class="t-1 fade-up md:col-span-7">Zarezerwuj <em class="italic text-brass">stolik</em></h1>
         <div class="md:col-span-4 md:col-start-9">
           <p class="lede fade-up fade-up-delay-1">
-            Cztery sale przy Floriańskiej 28. Odpowiadamy na każdą rezerwację w ciągu dwóch godzin w czasie otwarcia.
+            Cztery sale, od baru dla dwojga po lożę przy palenisku dla ośmiu osób. Na każdą rezerwację odpowiadamy w ciągu dwóch godzin w czasie otwarcia.
           </p>
           <a href="#formularz" class="btn-primary mt-6 fade-up fade-up-delay-2 md:hidden">Przejdź do formularza</a>
         </div>
@@ -59,13 +59,13 @@
 <script setup lang="ts">
 useSeoMeta({
   title: 'Rezerwacje · Noir Kraków',
-  description: 'Zarezerwuj stolik w Noir, atelier sensorycznym w Krakowie.',
+  description: 'Zarezerwuj stolik w Noir przy Floriańskiej 28 w Krakowie: bar, gabinet szachowy, salon degustacyjny albo loża przy palenisku.',
 })
 
 const features = [
-  'Menu cuppingowe: przewodnik po profilu wybranego originu',
-  'Masterclass parzenia dla grup do 6 osób',
-  'Barista, który oprowadza po micro-lotach przy stoliku',
-  'Preorder wybranego ziarna z odbiorem na miejscu',
+  'Barista przy stoliku, który opowie o każdej kawie i pomoże wybrać',
+  'Trzy kawy obok siebie na próbę, zanim zdecydujesz się na jedną',
+  'Pokaz parzenia dla grup do sześciu osób',
+  'Ziarna, które Ci zasmakują, zamówisz od razu do domu',
 ]
 </script>

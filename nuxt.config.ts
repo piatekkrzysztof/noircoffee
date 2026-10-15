@@ -14,13 +14,13 @@ export default defineNuxtConfig({
     pageTransition: { name: 'page', mode: 'out-in' },
     head: {
       htmlAttrs: { lang: 'pl' },
-      title: 'Noir · Kraków Coffee Atelier',
+      title: 'Noir · kawiarnia przy Floriańskiej 28, Kraków',
       meta: [
         { name: 'viewport', content: 'width=device-width, initial-scale=1, viewport-fit=cover' },
-        { name: 'description', content: 'Atelier sensoryczne. Micro-loty, warsztaty cuppingowe i rezerwacje prywatne.' },
+        { name: 'description', content: 'Kawiarnia przy Floriańskiej 28 w Krakowie. Kawy z czterech regionów, cupping przy jednym stole i cztery sale do rezerwacji.' },
         { name: 'theme-color', content: '#0d0906' },
         { property: 'og:type', content: 'website' },
-        { property: 'og:site_name', content: 'Noir · Kraków Coffee Atelier' },
+        { property: 'og:site_name', content: 'Noir · Floriańska 28, Kraków' },
         { property: 'og:image', content: '/images/hero.jpg' },
         { name: 'twitter:card', content: 'summary_large_image' },
       ],
