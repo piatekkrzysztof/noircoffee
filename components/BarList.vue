@@ -17,9 +17,9 @@
     </div>
 
     <div class="md:col-span-6 md:col-start-7">
-      <h2 class="t-1">Na barze teraz</h2>
+      <h2 class="t-1">Sześć kaw na barze</h2>
       <p class="mt-6 max-w-[46ch] text-[18px] leading-relaxed text-cream">
-        Sześć micro-lotów, każdy z własną kartą cuppingową. Powiedz, co lubisz, a pokażemy, które ziarno parzyć.
+        Każda ma kartę cuppingową z oceną od 88 do 94 punktów. Nie wiesz, którą wybrać? Kliknij, co lubisz, a pokażemy kawę, którą barista nalałby Ci pierwszą.
       </p>
 
       <div class="mt-8 flex flex-wrap items-center gap-2" role="group" aria-label="Co lubisz w kawie?">
@@ -92,7 +92,7 @@
                   </dl>
                   <div class="mt-6 flex flex-wrap items-center justify-between gap-4">
                     <p class="text-[16px]">W filiżance: {{ bean.tasting.join(', ') }}</p>
-                    <NuxtLink to="/preorder" class="btn-dark !min-h-[44px]">Zamów ziarno</NuxtLink>
+                    <NuxtLink to="/preorder" class="btn-dark !min-h-[44px]">Kup ziarno do domu</NuxtLink>
                   </div>
                 </article>
               </div>
@@ -102,7 +102,7 @@
       </ul>
 
       <NuxtLink to="/smaki" class="link-arrow mt-8">
-        Dopasuj dokładniej na czterech suwakach
+        Dobierz kawę dokładniej na czterech suwakach
         <svg width="14" height="10" viewBox="0 0 14 10" fill="none" aria-hidden="true"><path d="M1 5h12m0 0L9 1m4 4L9 9" stroke="currentColor" stroke-width="1.2" /></svg>
       </NuxtLink>
     </div>

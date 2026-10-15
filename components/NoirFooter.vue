@@ -11,7 +11,7 @@
           <div>
             <h2 class="t-1 text-espresso">Do zobaczenia</h2>
             <p class="mt-6 max-w-[40ch] text-[18px] leading-relaxed text-espresso">
-              Raz w miesiącu piszemy, co nowego trafiło na bar przy Floriańskiej: micro-loty, terminy cuppingów i preordery dla stałych gości.
+              Raz w miesiącu piszemy, jaka kawa przyjechała na Floriańską, kiedy są wolne miejsca na cupping i co można zamówić, zanim trafi na bar.
             </p>
 
             <form class="mt-8 max-w-[440px]" novalidate @submit.prevent="subscribe">
@@ -74,7 +74,7 @@
           </div>
 
           <p class="text-center text-[16px] md:col-span-2">
-            © {{ year }} Noir Coffee Atelier, Kraków · projekt portfolio, rezerwacje i zamówienia działają demonstracyjnie ·
+            © {{ year }} Noir, Floriańska 28, Kraków · projekt portfolio, rezerwacje i zamówienia działają demonstracyjnie ·
             <NuxtLink to="/zrodla-zdjec" class="postcard-link">Źródła zdjęć</NuxtLink>
           </p>
         </div>
