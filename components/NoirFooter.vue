@@ -49,6 +49,13 @@
               height="117"
               class="stamp absolute right-0 top-0 aspect-[3/4] w-16 object-cover sm:w-[88px]"
             />
+            <!-- Postmark: the Noir seal stamped half over the stamp -->
+            <NoirLogo
+              variant="seal"
+              decorative
+              bean-color="#0d0906"
+              class="postmark pointer-events-none absolute right-5 top-12 w-24 text-espresso sm:right-8 sm:top-[60px] sm:w-28"
+            />
 
             <address class="flex flex-col gap-3 pr-24 pt-2 text-[18px] not-italic leading-snug sm:pr-28">
               <a href="https://maps.google.com/?q=Floria%C5%84ska+28,+Krak%C3%B3w" class="postcard-link" rel="noopener" target="_blank">ul. Floriańska 28, 31-021 Kraków</a>
@@ -144,6 +151,12 @@ async function subscribe() {
 
 .postcard-link:hover {
   text-decoration-color: #0d0906;
+}
+
+.postmark {
+  opacity: 0.55;
+  transform: rotate(-14deg);
+  mix-blend-mode: multiply;
 }
 
 .stamp {
