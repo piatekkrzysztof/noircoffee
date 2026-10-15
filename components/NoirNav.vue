@@ -20,12 +20,12 @@
     <nav class="shell relative flex h-[var(--nav-h)] items-center justify-between gap-6" aria-label="Główna nawigacja">
       <NuxtLink
         to="/"
-        class="t-2 leading-none text-cream transition-[color,opacity] duration-300 hover:text-brass-light"
+        class="text-cream transition-[color,opacity] duration-300 hover:text-brass-light"
         :class="overPhoto ? 'pointer-events-none opacity-0' : 'opacity-100'"
         :tabindex="overPhoto ? -1 : undefined"
         aria-label="Noir, strona główna"
       >
-        Noir
+        <NoirLogo class="h-[30px] w-auto" decorative />
       </NuxtLink>
 
       <div class="flex items-center gap-2">

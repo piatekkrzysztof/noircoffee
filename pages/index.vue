@@ -24,8 +24,9 @@
         </div>
 
         <div class="fade-up fade-up-delay-2">
-          <h1 class="wordmark t-mark -ml-[0.04em] text-cream">
-            Noir<span class="sr-only">, atelier kawowe przy ulicy Floriańskiej 28 w Krakowie</span>
+          <h1 class="wordmark -ml-[0.02em] text-cream">
+            <span class="sr-only">Noir, atelier kawowe przy ulicy Floriańskiej 28 w Krakowie</span>
+            <NoirLogo class="hero-logo w-auto" decorative />
           </h1>
           <NuxtLink to="/rezerwacje" class="btn-primary mt-4 w-full md:hidden">Zarezerwuj stolik</NuxtLink>
         </div>
@@ -235,6 +236,11 @@ onMounted(() => {
       animation-range: 0 100svh;
     }
   }
+}
+
+/* The wordmark keeps the size the typeset name had: 0.72 of the old font size (viewBox height / em) */
+.hero-logo {
+  height: max(calc(var(--t-mark) * 0.72), 27vw);
 }
 
 @keyframes settle {
