@@ -1,7 +1,7 @@
 <template>
   <!-- The best match is set as a paper cupping card; the rest sit on the dark surface -->
+  <!-- No v-reveal here: the results list re-mounts cards on every slider move and animates them itself -->
   <article
-    v-reveal
     class="group grid gap-6 p-5 transition-colors duration-300 sm:grid-cols-[180px_1fr] sm:p-6"
     :class="best ? 'bg-paper text-espresso' : 'bg-surface text-cream hover:bg-surface2'"
   >

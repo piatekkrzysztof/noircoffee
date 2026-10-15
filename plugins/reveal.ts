@@ -11,7 +11,8 @@ export default defineNuxtPlugin((nuxtApp) => {
         (entries) => {
           for (const entry of entries) {
             if (entry.isIntersecting) {
-              entry.target.classList.add('is-visible')
+              // An attribute, not a class: Vue rewrites className when a bound :class changes
+              entry.target.setAttribute('data-shown', '')
               observer?.unobserve(entry.target)
             }
           }
