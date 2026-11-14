@@ -16,7 +16,7 @@
       <div class="shell flex flex-1 flex-col justify-between pb-4 pt-6 md:pb-5">
         <div class="flex flex-col gap-5 md:flex-row md:items-start md:justify-between">
           <p class="max-w-[46ch] text-[18px] leading-relaxed text-cream fade-up">
-            Atelier kawowe przy Floriańskiej 28 w Krakowie. Sześć micro-lotów, cupping w małych grupach i cztery sale, w których nikt nie goni. {{ openNow }}
+            Kawiarnia przy Floriańskiej 28. Sześć kaw z sześciu farm, każda z adresem. Barista dobierze tę, która smakuje Tobie. {{ openNow }}
           </p>
           <NuxtLink to="/rezerwacje" class="btn-primary hidden self-start fade-up fade-up-delay-1 md:inline-flex">
             Zarezerwuj stolik
@@ -25,7 +25,7 @@
 
         <div class="fade-up fade-up-delay-2">
           <h1 class="wordmark -ml-[0.02em] text-cream">
-            <span class="sr-only">Noir, atelier kawowe przy ulicy Floriańskiej 28 w Krakowie</span>
+            <span class="sr-only">Noir, kawiarnia przy ulicy Floriańskiej 28 w Krakowie</span>
             <NoirLogo class="hero-logo w-auto" decorative />
           </h1>
           <NuxtLink to="/rezerwacje" class="btn-primary mt-4 w-full md:hidden">Zarezerwuj stolik</NuxtLink>
@@ -39,13 +39,13 @@
     </div>
 
     <!-- ON THE BAR: the live list -->
-    <section class="shell mt-32 md:mt-48" aria-label="Micro-loty na barze">
+    <section class="shell mt-32 md:mt-48" aria-label="Kawy na barze">
       <BarList />
     </section>
 
     <!-- REGIONS: loose scatter -->
     <section class="shell mt-40 md:mt-56" aria-labelledby="regions-title">
-      <h2 id="regions-title" v-reveal class="t-2">Regiony</h2>
+      <h2 id="regions-title" v-reveal class="t-2">Skąd ją bierzemy</h2>
 
       <div class="mt-12 grid grid-cols-12 gap-x-6 gap-y-[72px] md:gap-y-0">
         <NuxtLink
@@ -84,7 +84,7 @@
         <div class="lg:col-span-5">
           <h2 id="workshops-title" v-reveal class="t-1">Cupping przy Floriańskiej</h2>
           <p v-reveal="80" class="mt-6 max-w-[38ch] text-[18px] leading-relaxed">
-            Siadamy przy jednym stole, osiem osób najwyżej. Pięć czarek, łyżka, karta do zabrania. Bez żargonu i bez ocen.
+            Tak palarnie oceniają kawę: kilka czarek obok siebie, gorąca woda i łyżka. Przy naszym stole siedzi najwyżej osiem osób, a karta, którą wypełnisz, zostaje u Ciebie.
           </p>
           <img
             v-reveal="140"
@@ -147,7 +147,7 @@
         <div v-reveal class="-mt-20 bg-paper p-8 text-espresso md:mt-0 md:w-[420px]">
           <h2 id="visit-title" class="t-2">Floriańska 28</h2>
           <p class="mt-4 text-[16px] leading-relaxed">
-            ul. Floriańska 28, 31-021 Kraków<br>kilka minut od Bramy Floriańskiej
+            ul. Floriańska 28, 31-021 Kraków<br>trzy minuty pieszo od Bramy Floriańskiej
           </p>
 
           <dl class="mt-6 grid grid-cols-[1fr_auto] gap-x-6 gap-y-1 text-[16px]">
@@ -177,10 +177,10 @@
 import { ORIGINS } from '~/data/origins'
 
 useSeoMeta({
-  title: 'Noir · atelier kawowe, Floriańska 28, Kraków',
-  description: 'Atelier kawowe przy Floriańskiej 28 w Krakowie. Sześć micro-lotów z kartami cuppingowymi, cupping w małych grupach i cztery sale do rezerwacji.',
+  title: 'Noir · kawiarnia przy Floriańskiej 28, Kraków',
+  description: 'Kawiarnia przy Floriańskiej 28 w Krakowie. Sześć kaw z sześciu farm, każda z kartą cuppingową. Cupping przy jednym stole i cztery sale do rezerwacji.',
   ogTitle: 'Noir · Floriańska 28, Kraków',
-  ogDescription: 'Micro-loty, cupping w małych grupach i cztery prywatne sale na Drodze Królewskiej.',
+  ogDescription: 'Sześć kaw z sześciu farm, cupping przy jednym stole i cztery sale na Drodze Królewskiej.',
   ogImage: '/images/found/florianska-noc.jpg',
 })
 

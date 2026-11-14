@@ -10,11 +10,11 @@
           </button>
         </div>
 
-        <div class="mx-auto mt-2 max-w-[320px]">
+        <div v-reveal="80" class="mx-auto mt-2 max-w-[320px]">
           <FlavorRadar :values="values" :compare="best?.flavorProfile" :axes="axes" />
         </div>
 
-        <div class="mt-2 flex flex-wrap gap-2" role="group" aria-label="Gotowe profile">
+        <div v-reveal="140" class="mt-2 flex flex-wrap gap-2" role="group" aria-label="Gotowe profile">
           <button
             v-for="p in presets"
             :key="p.label"
@@ -28,7 +28,7 @@
         </div>
 
         <div class="mt-8 flex flex-col gap-6">
-          <div v-for="axis in axes" :key="axis.id">
+          <div v-for="(axis, i) in axes" :key="axis.id" v-reveal="200 + i * 70">
             <div class="flex items-baseline justify-between">
               <label :for="`axis-${axis.id}`" class="text-[16px] font-medium text-cream">{{ axis.label }}</label>
               <span class="text-[16px] tabular-nums text-brass-light">{{ values[axis.id] }} z 10</span>
@@ -88,10 +88,10 @@ import type { FlavorProfile } from '~/types'
 import { BEANS } from '~/data/beans'
 
 const axes = [
-  { id: 'chocolate', label: 'Czekolada', note: 'Od mlecznej po gorzką: masa kakaowa, pralinki, trufle.' },
-  { id: 'citrus',    label: 'Cytrus',    note: 'Limonka, bergamotka, yuzu. Jasna, świeża kwasowość.' },
-  { id: 'ferment',   label: 'Ferment',   note: 'Wino, kombucha, tropiki. Efekt obróbki anaerobic.' },
-  { id: 'floral',    label: 'Kwiaty',    note: 'Jaśmin, hibiskus, róża. Delikatne aromaty kwiatowe.' },
+  { id: 'chocolate', label: 'Czekolada', note: 'Kakao, orzechy, karmel. Im więcej, tym kawa pełniejsza i mniej kwaśna.' },
+  { id: 'citrus',    label: 'Cytrus',    note: 'Limonka, bergamotka, grejpfrut. Świeża, jasna kwasowość.' },
+  { id: 'ferment',   label: 'Ferment',   note: 'Wino, dojrzałe owoce, rum. Tak smakują kawy fermentowane bez powietrza.' },
+  { id: 'floral',    label: 'Kwiaty',    note: 'Jaśmin, róża, herbata. Lekkość, którą najmocniej czuć w kawach z Etiopii.' },
 ] as const
 
 const presets: { label: string; profile: FlavorProfile }[] = [

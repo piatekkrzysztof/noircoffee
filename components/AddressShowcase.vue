@@ -20,7 +20,7 @@
           class="caption absolute left-[calc(100%+48px)] top-0 hidden w-[28ch] text-[18px] leading-relaxed text-cream lg:block"
           :class="{ 'is-on': stage >= 2 }"
         >
-          Na Floriańskiej każda kamienica ma numer i historię. Na każdym worku, który do nas trafia, jest nazwa farmy, wysokość uprawy i data zbioru. Kawy bez adresu nie kupujemy.
+          Na Floriańskiej każda kamienica ma swój numer. Każdy nasz worek też: nazwę farmy, wysokość uprawy i dzień zbioru. Kawy bez adresu nie kupujemy.
         </p>
       </div>
 
@@ -33,7 +33,7 @@
       </p>
 
       <p class="mt-6 max-w-[34ch] text-center text-[18px] leading-relaxed text-cream lg:hidden">
-        Na Floriańskiej każda kamienica ma numer i historię. Na każdym worku, który do nas trafia, jest nazwa farmy, wysokość uprawy i data zbioru. Kawy bez adresu nie kupujemy.
+        Na Floriańskiej każda kamienica ma swój numer. Każdy nasz worek też: nazwę farmy, wysokość uprawy i dzień zbioru. Kawy bez adresu nie kupujemy.
       </p>
     </div>
   </section>

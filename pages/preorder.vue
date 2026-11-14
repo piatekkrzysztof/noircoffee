@@ -2,10 +2,10 @@
   <div>
     <PageIntro image="/images/hero.jpg" image-alt="Palone ziarna kawy w metalowej puszce" focus="center 45%">
       <template #title>
-        Zamów <em class="italic text-brass">swój micro-lot</em>
+        Kawa z Floriańskiej <em class="italic text-brass">do domu</em>
       </template>
       <template #lede>
-        Wybierz pakiet, odbierz go przy Floriańskiej albo zamów kuriera. Każda paczka ma kartę cuppingową i przepis na parzenie.
+        Wybierz pakiet, a upalimy ziarna pod Twoje zamówienie. Odbierzesz je przy Floriańskiej po trzech dniach albo przywiezie je kurier. W każdej paczce jest karta cuppingowa i przepis na parzenie.
       </template>
       <template #action>
         <a href="#pakiety" class="btn-primary md:hidden">Wybierz pakiet</a>
@@ -131,13 +131,13 @@ import type { Package } from '~/types'
 
 useSeoMeta({
   title: 'Preorder · Noir Kraków',
-  description: 'Zamów swój micro-lot z odbiorem osobistym lub dostawą.',
+  description: 'Kawa z baru Noir do domu: pakiety od 150 do 500 g, palone pod zamówienie, z odbiorem przy Floriańskiej 28 albo kurierem.',
 })
 
 const packages: Package[] = [
-  { id: 'odkrywca',    size: 'Starter', name: 'Odkrywca',    weight: '150 g ziaren', price: 89,  pickup: true, includes: ['1 single origin micro-lot', 'Karta cuppingowa', 'Przepis na parzenie (PDF)'] },
-  { id: 'kolekcjoner', size: 'Bestseller', name: 'Kolekcjoner', weight: '250 g ziaren', price: 149, pickup: true, badge: 'wybierany najczęściej', includes: ['2 single origin micro-loty', 'Karty cuppingowe', 'Przepis na parzenie (PDF)', '15 minut konsultacji z baristą'] },
-  { id: 'koneser',     size: 'Premium', name: 'Koneser',     weight: '500 g ziaren', price: 269, pickup: true, badge: 'limitowany', includes: ['3 premium micro-loty', 'Cupping dla 2 osób', 'Woreczek na zmieloną kawę', 'Subskrypcja na kolejny miesiąc'] },
+  { id: 'odkrywca',    size: 'Starter', name: 'Odkrywca',    weight: '150 g ziaren', price: 89,  pickup: true, includes: ['1 kawa z jednej farmy', 'Karta cuppingowa', 'Przepis na parzenie (PDF)'] },
+  { id: 'kolekcjoner', size: 'Bestseller', name: 'Kolekcjoner', weight: '250 g ziaren', price: 149, pickup: true, badge: 'wybierany najczęściej', includes: ['2 kawy z różnych farm', 'Karty cuppingowe', 'Przepis na parzenie (PDF)', '15 minut konsultacji z baristą'] },
+  { id: 'koneser',     size: 'Premium', name: 'Koneser',     weight: '500 g ziaren', price: 269, pickup: true, badge: 'limitowany', includes: ['3 najwyżej oceniane kawy z baru', 'Cupping dla 2 osób', 'Woreczek na zmieloną kawę', 'Subskrypcja na kolejny miesiąc'] },
 ]
 
 const selectedId = ref<Package['id']>('kolekcjoner')

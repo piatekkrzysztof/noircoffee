@@ -2,10 +2,10 @@
   <div>
     <PageIntro image="/images/found/cupping-stol.jpg" image-alt="Rząd czarek z kawą przygotowanych do cuppingu, w tle ceglana ściana" focus="center 60%">
       <template #title>
-        Kalendarium <em class="italic text-brass">sensoryczne</em>
+        Warsztaty <em class="italic text-brass">przy stole</em>
       </template>
       <template #lede>
-        Cupping, masterclassy i wykłady w grupach do dwudziestu osób. W cenie degustacja, karta cuppingowa i kawa do zabrania.
+        Cupping, parzenie i wykłady w grupach od sześciu do dwudziestu osób. W cenie są wszystkie kawy, karta cuppingowa i 100 g ziaren do domu.
       </template>
     </PageIntro>
 
@@ -72,7 +72,7 @@
         <div v-reveal class="md:col-span-7">
           <h2 class="t-1">Warsztat dla firmy albo <em class="italic">na urodziny</em></h2>
           <p class="mt-6 max-w-[48ch] text-[18px] leading-relaxed">
-            Ustalamy termin, program i liczbę osób, do dwunastu. Cupping w grupie prywatnej zaczyna się od 180 zł za osobę, w Salonie degustacyjnym albo w Loży przy palenisku.
+            Ustalamy termin, program i liczbę osób, do dwunastu. Prywatny cupping kosztuje od 180 zł za osobę i odbywa się w Salonie degustacyjnym albo w Loży przy palenisku.
           </p>
         </div>
         <div v-reveal="100" class="md:col-span-4 md:col-start-9 md:justify-self-end">
@@ -89,7 +89,7 @@
 <script setup lang="ts">
 useSeoMeta({
   title: 'Warsztaty · Noir Kraków',
-  description: 'Warsztaty cuppingowe, brewing masterclassy i degustacje w Noir Coffee Atelier Kraków.',
+  description: 'Cupping, nauka parzenia i wykłady o kawie przy Floriańskiej 28 w Krakowie. Grupy od 6 do 20 osób, terminy i wolne miejsca.',
 })
 
 const { all: allEvents, tags } = useEvents()
